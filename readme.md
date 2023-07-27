@@ -2,9 +2,9 @@
 
 This repo contains the code for our paper "Shrink-Perturb Improves Architecture Mixing during Population Based Training for Neural Architecture Search"
 
-<center>
+<p align="middle">
     <img width="800" src="images/PBT_NAS_overview.png">
-</center>
+</p>
 
 ## Abstract
 
@@ -17,9 +17,11 @@ We propose PBT-NAS, an adaptation of PBT to NAS where architectures are improved
 See the paper for the results of our GAN experiments (two search spaces * two datasets) & RL experiments (three challenging MuJoCo tasks). 
 We would like to highlight our ablation studies showing the benefit of shrink-perturb:
 
-<center>
-    <img width="450" src="images/pbtnas_table_ablation.png"> <img width="400" src="images/shrink_perturb_spectrum.png">
-</center>
+<p align="middle">
+    <img width="450" src="images/pbtnas_table_ablation.png"> 
+    <img height="150" hspace="20"/>
+    <img width="450" src="images/shrink_perturb_spectrum.png">
+</p>
 
 ## Setup
 Create & activate conda environment 
