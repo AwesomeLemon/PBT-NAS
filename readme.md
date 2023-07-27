@@ -18,9 +18,7 @@ See the paper for the results of our GAN experiments (two search spaces * two da
 We would like to highlight our ablation studies showing the benefit of shrink-perturb:
 
 <center>
-    <img width="450" src="images/pbtnas_table_ablation.png">
-    <img height="150" hspace="20"/>
-    <img width="400" src="images/shrink_perturb_spectrum.png">
+    <img width="450" src="images/pbtnas_table_ablation.png"> <img width="400" src="images/shrink_perturb_spectrum.png">
 </center>
 
 ## Setup
