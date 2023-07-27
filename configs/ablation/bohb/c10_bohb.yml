@@ -1,0 +1,52 @@
+logs_path: '/export/scratch1/home/aleksand/s2/PBT-NAS-refactor/logs'
+
+out_name_template: "{dataset_name}_{algorithm}_GanHard_{seed_offset}"
+
+seed: 31173
+seed_offset: 0
+processes_per_gpu: 2
+num_cpus: 2
+n_seeds: 1
+
+continue_auto: true
+
+if_shared_fs: true # if file system is shared, no need to use ssh/rsync
+
+cleanup_final: true
+if_not_clean_dir_bohb: true # when RayTune loads a checkpoint, old files shouldn't be deleted, or the optimization will start from scratch
+
+dataset_name: cifar10advnas
+dataset_parameters:
+  dataset_path: '/export/scratch1/home/aleksand/s2/data/cifar10'
+  train_batch_size: 40
+  n_workers: 4
+
+model_class: AdvNas
+model_parameters:
+  gf_dim: 256
+  n_cells: 3
+  n_cells_discr: 4
+  bottom_width: 4
+  latent_dim: 120
+  g_activation: 'relu'
+  df_dim: 128
+  d_activation: 'relu'
+  d_spectral_norm: true
+  d_type: 'advnas_my' # GanHard: discriminator
+  task: generation
+  gan_target_res: 32
+  if_search_projections: true # GanHard: search parameters of projections
+  generator_batch_size_multiplier: 2
+
+if_search_arch: true
+
+optimizer_name: MyAdamW # adapted to preserve parts of the optimizer state dict for which the shapes match
+lr: 0.0002
+wd: 0.0
+if_gen_avg: true # use weight averaging in the generator
+
+algorithm: BOHB
+population_size: 24 # not used in BOHB as there's no population, num_samples is the parameter of BOHB
+max_epochs: 300
+epochs_step: 10
+num_samples: 98

@@ -1,0 +1,83 @@
+logs_path: '/export/scratch2/data/aleksand/PBT-NAS/logs'
+
+out_name_template: "{rl_general[task_name]}_{algorithm}_pop{population_size}"
+
+seed: 31173
+seed_offset: 0
+processes_per_gpu: 2
+num_cpus: 2
+n_seeds: 3
+
+continue_auto: true
+
+ssh_user: aleksand
+ray_head_node: star14.scilens.private
+if_shared_fs: false
+final_upload_node: star04.scilens.private
+
+cleanup_final: true
+
+dataset_name: mujoco
+
+model_class: drqv2
+model_parameters:
+  critic_target_tau: 0.01
+  update_every_steps: 2
+  num_expl_steps: 2000
+  hidden_dim: 1024
+  feature_dim: 50 # will be overriden
+  stddev_clip: 0.3
+  stddev_schedule: 'linear(1.0,0.1,500000)'
+  task: 'rl_normact'
+
+  search_encoder: true
+  n_layers_encoder: 4
+  search_sn_encoder: true
+
+  search_actor: true
+  n_layers_actor: 4
+  search_sn_actor: true
+
+  search_critic: true
+  n_layers_critic: 4
+  search_sn_critic: true
+  search_q_sep_critic: true
+
+  search_norm_type: 'per_network'
+  search_activ_type: 'per_layer'
+  activation_options: ['id', 'tanh', 'relu', 'swish']
+
+rl_general:
+  task_name: quadruped_run
+  # task settings
+  frame_stack: 3
+  action_repeat: 2
+  discount: 0.99
+  # train settings
+  num_seed_frames: 4000
+  # eval
+  eval_every_frames: 100000
+  frames_in_an_epoch: 10000
+  num_eval_episodes: 10
+  # snapshot
+  save_snapshot: true # set to true in order not to delete replay buffer files
+  # replay buffer
+  replay_buffer_size: 100000
+  replay_buffer_num_workers: 2
+  nstep: 3
+  batch_size: 256
+  replay_buffer_type: ram
+  # misc
+  save_video: true
+  save_train_video: false
+
+if_search_arch: true
+
+optimizer_name: MyAdamW
+lr: 0.0001 # note that for hard tasks the value is different
+wd: 0.0
+
+algorithm: RandomSearch
+population_size: 6
+max_epochs: 300
+epochs_step: 10

@@ -1,0 +1,60 @@
+logs_path: '/export/scratch1/home/aleksand/s3/PBT-NAS/logs'
+
+out_name_template: "{dataset_name}_{algorithm}_pop{population_size}_GanHard_mutation"
+
+seed: 31173
+seed_offset: 0
+processes_per_gpu: 2
+num_cpus: 2
+n_seeds: 3
+
+continue_auto: true
+
+ssh_user: aleksand
+ray_head_node: star04.scilens.private
+if_shared_fs: false
+final_upload_node: star04.scilens.private
+
+cleanup_final: true
+
+dataset_name: cifar10advnas
+dataset_parameters:
+  dataset_path: '/export/scratch1/home/aleksand/s2/data/cifar10'
+  train_batch_size: 40
+  n_workers: 4
+
+model_class: AdvNas
+model_parameters:
+  gf_dim: 256
+  n_cells: 3
+  n_cells_discr: 4
+  bottom_width: 4
+  latent_dim: 120
+  g_activation: 'relu'
+  df_dim: 128
+  d_activation: 'relu'
+  d_spectral_norm: true
+  d_type: 'advnas_my'
+  task: generation
+  gan_target_res: 32
+  if_search_projections: true
+  generator_batch_size_multiplier: 2
+
+if_search_arch: true
+if_mutate: true
+
+replace_arch_percent: 0.25
+percent_parents_for_mixing: 0.25
+percent_old_population_survive: 0.75
+soups: [['best', '']]
+
+optimizer_name: MyAdamW
+lr: 0.0002
+wd: 0.0
+if_gen_avg: true
+
+algorithm: PBTNAS
+population_size: 24
+n_children: 6
+max_epochs: 300
+epochs_step: 10
