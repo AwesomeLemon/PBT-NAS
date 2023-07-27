@@ -19,7 +19,8 @@ We would like to highlight our ablation studies showing the benefit of shrink-pe
 
 <p align="middle">
     <img width="450" src="images/pbtnas_table_ablation.png"> 
-    <img height="150" hspace="20"/>
+</p>
+<p align="middle">
     <img width="450" src="images/shrink_perturb_spectrum.png">
 </p>
 
