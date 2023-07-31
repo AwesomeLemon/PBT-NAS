@@ -1,7 +1,6 @@
 # PBT-NAS
 
-This repo contains the code for our paper "Shrink-Perturb Improves Architecture Mixing during Population Based Training for Neural Architecture Search"
-
+This repo contains the code for our paper [Shrink-Perturb Improves Architecture Mixing during Population Based Training for Neural Architecture Search](https://arxiv.org/abs/2307.15621)
 <p align="middle">
     <img width="800" src="images/PBT_NAS_overview.png">
 </p>
